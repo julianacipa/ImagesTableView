@@ -16,6 +16,8 @@
 		407E54A31BE815320023323F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 407E54A11BE815320023323F /* LaunchScreen.storyboard */; };
 		407E54AE1BE815320023323F /* ImagesDownloadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 407E54AD1BE815320023323F /* ImagesDownloadTests.m */; };
 		407E54B91BE815320023323F /* ImagesDownloadUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 407E54B81BE815320023323F /* ImagesDownloadUITests.m */; };
+		407E54CD1BE8239F0023323F /* ImageDetail+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 407E54CA1BE8239F0023323F /* ImageDetail+CoreDataProperties.m */; };
+		407E54CE1BE8239F0023323F /* ImageDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 407E54CC1BE8239F0023323F /* ImageDetail.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,10 @@
 		407E54B41BE815320023323F /* ImagesDownloadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImagesDownloadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		407E54B81BE815320023323F /* ImagesDownloadUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagesDownloadUITests.m; sourceTree = "<group>"; };
 		407E54BA1BE815320023323F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		407E54C91BE8239F0023323F /* ImageDetail+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ImageDetail+CoreDataProperties.h"; sourceTree = "<group>"; };
+		407E54CA1BE8239F0023323F /* ImageDetail+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ImageDetail+CoreDataProperties.m"; sourceTree = "<group>"; };
+		407E54CB1BE8239F0023323F /* ImageDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDetail.h; sourceTree = "<group>"; };
+		407E54CC1BE8239F0023323F /* ImageDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDetail.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +162,10 @@
 		407E54C71BE817BC0023323F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				407E54C91BE8239F0023323F /* ImageDetail+CoreDataProperties.h */,
+				407E54CA1BE8239F0023323F /* ImageDetail+CoreDataProperties.m */,
+				407E54CB1BE8239F0023323F /* ImageDetail.h */,
+				407E54CC1BE8239F0023323F /* ImageDetail.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -299,8 +309,10 @@
 			files = (
 				407E54981BE815320023323F /* ViewController.m in Sources */,
 				407E549E1BE815320023323F /* ImagesDownload.xcdatamodeld in Sources */,
+				407E54CE1BE8239F0023323F /* ImageDetail.m in Sources */,
 				407E54951BE815320023323F /* AppDelegate.m in Sources */,
 				407E54921BE815320023323F /* main.m in Sources */,
+				407E54CD1BE8239F0023323F /* ImageDetail+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

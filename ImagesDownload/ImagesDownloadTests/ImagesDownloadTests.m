@@ -8,8 +8,11 @@
 
 #import <XCTest/XCTest.h>
 #import "AppDelegate.h"
+#import "ImageDetail.h"
 
 @interface ImagesDownloadTests : XCTestCase
+
+@property (nonatomic, strong)AppDelegate *appDelegate;
 
 @end
 
@@ -18,17 +21,17 @@
 - (void)setUp {
     [super setUp];
     
-    
+    self.appDelegate = [[AppDelegate alloc] init];
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    self.appDelegate = nil;
+    
     [super tearDown];
 }
 
 -(void)testAddingImageDetailObject {
-    AppDelegate *appDelegate = [[AppDelegate alloc] init];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSManagedObjectContext *context = [self.appDelegate managedObjectContext];
     NSManagedObject *imageDetail = [NSEntityDescription
                                        insertNewObjectForEntityForName:@"ImageDetail"
                                        inManagedObjectContext:context];
@@ -37,6 +40,24 @@
     [imageDetail setValue:@10 forKey:@"userId"];
     [imageDetail setValue:@"Acton Town, Ealing" forKey:@"title"];
     [imageDetail setValue:@"Benjamin" forKey:@"userName"];
+    NSError *error;
+    BOOL imageDetailsAreSaved = [context save:&error];
+    
+    XCTAssertTrue(imageDetailsAreSaved);
+    XCTAssertNil(error);
+}
+
+-(void)testAddingImageDetailObjectUsingModel {
+    NSManagedObjectContext *context = [self.appDelegate managedObjectContext];
+    ImageDetail *imageDetail = [NSEntityDescription
+                                    insertNewObjectForEntityForName:@"ImageDetail"
+                                    inManagedObjectContext:context];
+    imageDetail.imageDetailsId = @2;
+    imageDetail.imageId = @299;
+    imageDetail.userId = @9;
+    imageDetail.title = @"Aldgate, City of London";
+    imageDetail.userName = @"Abigail";
+    
     NSError *error;
     BOOL imageDetailsAreSaved = [context save:&error];
     
