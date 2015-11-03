@@ -67,12 +67,23 @@
                                                 <constraint firstAttribute="height" constant="33" id="rb3-zw-iNd"/>
                                             </constraints>
                                         </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovY-qg-fhv">
+                                            <rect key="frame" x="140" y="8" width="321" height="143"/>
+                                            <animations/>
+                                            <connections>
+                                                <action selector="onImageTapped" destination="TJ6-pO-TFD" eventType="touchUpInside" id="XaA-3f-da2"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <animations/>
                                     <constraints>
+                                        <constraint firstItem="ovY-qg-fhv" firstAttribute="leading" secondItem="CkA-1Y-fQs" secondAttribute="leading" id="7Ay-Wi-h6D"/>
                                         <constraint firstItem="CkA-1Y-fQs" firstAttribute="centerY" secondItem="xOh-Ny-ebk" secondAttribute="centerY" id="I6R-xR-5gi"/>
                                         <constraint firstItem="80G-h8-dpz" firstAttribute="top" secondItem="CkA-1Y-fQs" secondAttribute="top" id="NR0-75-D8m"/>
                                         <constraint firstItem="CkA-1Y-fQs" firstAttribute="centerX" secondItem="xOh-Ny-ebk" secondAttribute="centerX" constant="0.5" id="Wja-9E-aUb"/>
+                                        <constraint firstItem="ovY-qg-fhv" firstAttribute="trailing" secondItem="CkA-1Y-fQs" secondAttribute="trailing" id="adH-i4-SwG"/>
+                                        <constraint firstItem="ovY-qg-fhv" firstAttribute="bottom" secondItem="CkA-1Y-fQs" secondAttribute="bottom" id="buC-pu-Nd6"/>
+                                        <constraint firstItem="ovY-qg-fhv" firstAttribute="top" secondItem="CkA-1Y-fQs" secondAttribute="top" id="eWT-4G-3PW"/>
                                         <constraint firstItem="80G-h8-dpz" firstAttribute="leading" secondItem="CkA-1Y-fQs" secondAttribute="leading" id="hxJ-He-MlV"/>
                                         <constraint firstItem="80G-h8-dpz" firstAttribute="trailing" secondItem="CkA-1Y-fQs" secondAttribute="trailing" id="wl1-eq-KSd"/>
                                     </constraints>
@@ -80,6 +91,7 @@
                                 <animations/>
                                 <connections>
                                     <outlet property="displayImageView" destination="CkA-1Y-fQs" id="7ED-pt-kcD"/>
+                                    <outlet property="imageButton" destination="ovY-qg-fhv" id="NhY-Uq-iNd"/>
                                     <outlet property="imageTitleLabel" destination="OYd-8h-N5J" id="pfr-uc-o91"/>
                                     <outlet property="imageView" destination="CkA-1Y-fQs" id="h0j-RF-4T5"/>
                                 </connections>
