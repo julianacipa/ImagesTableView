@@ -19,6 +19,7 @@
 		407E54CD1BE8239F0023323F /* ImageDetail+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 407E54CA1BE8239F0023323F /* ImageDetail+CoreDataProperties.m */; };
 		407E54CE1BE8239F0023323F /* ImageDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 407E54CC1BE8239F0023323F /* ImageDetail.m */; };
 		407E54D11BE82B0C0023323F /* FetchImageDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 407E54D01BE82B0C0023323F /* FetchImageDetails.m */; };
+		407E54D41BE8431B0023323F /* ImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 407E54D31BE8431B0023323F /* ImageTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		407E54CC1BE8239F0023323F /* ImageDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDetail.m; sourceTree = "<group>"; };
 		407E54CF1BE82B0C0023323F /* FetchImageDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchImageDetails.h; sourceTree = "<group>"; };
 		407E54D01BE82B0C0023323F /* FetchImageDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchImageDetails.m; sourceTree = "<group>"; };
+		407E54D21BE8431B0023323F /* ImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTableViewCell.h; sourceTree = "<group>"; };
+		407E54D31BE8431B0023323F /* ImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,8 +120,6 @@
 				407E54C61BE817AF0023323F /* ViewControllers */,
 				407E54931BE815320023323F /* AppDelegate.h */,
 				407E54941BE815320023323F /* AppDelegate.m */,
-				407E54961BE815320023323F /* ViewController.h */,
-				407E54971BE815320023323F /* ViewController.m */,
 				407E54991BE815320023323F /* Main.storyboard */,
 				407E549F1BE815320023323F /* Assets.xcassets */,
 				407E54A11BE815320023323F /* LaunchScreen.storyboard */,
@@ -158,6 +159,10 @@
 		407E54C61BE817AF0023323F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				407E54961BE815320023323F /* ViewController.h */,
+				407E54971BE815320023323F /* ViewController.m */,
+				407E54D21BE8431B0023323F /* ImageTableViewCell.h */,
+				407E54D31BE8431B0023323F /* ImageTableViewCell.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -317,6 +322,7 @@
 				407E54CE1BE8239F0023323F /* ImageDetail.m in Sources */,
 				407E54D11BE82B0C0023323F /* FetchImageDetails.m in Sources */,
 				407E54951BE815320023323F /* AppDelegate.m in Sources */,
+				407E54D41BE8431B0023323F /* ImageTableViewCell.m in Sources */,
 				407E54921BE815320023323F /* main.m in Sources */,
 				407E54CD1BE8239F0023323F /* ImageDetail+CoreDataProperties.m in Sources */,
 			);

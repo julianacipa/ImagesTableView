@@ -19,9 +19,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [self clearImageDetails];
     [self fetchImageDetails];
     
     return YES;
+}
+
+-(void) clearImageDetails {
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"ImageDetail"];
+    NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+    
+    NSError *deleteError = nil;
+    [self.persistentStoreCoordinator executeRequest:delete
+                                        withContext:self.managedObjectContext
+                                              error:&deleteError];
 }
 
 -(void)fetchImageDetails {
@@ -33,6 +44,7 @@
             //handle error here
         } else {
             [self saveImageDetails:imageDetails];
+            [self displayImages];
         }
     }];
 }
@@ -49,13 +61,21 @@
         imageDetail.userName = [obj objectForKey:@"UserName"];
 
         NSError *error;
-        if ([self.managedObjectContext save:&error]) {
-            
-            
-        } else {
+        if (![self.managedObjectContext save:&error]) {
             //handle error
         }
     }];
+}
+
+-(void)displayImages {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ImageDetail"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DisplayImages"
+                                                        object:fetchedObjects];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -77,7 +97,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AddProduct" object:nil];
+ 
     [self saveContext];
 }
 
