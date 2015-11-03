@@ -27,7 +27,15 @@ static NSString *const GET_PHOTO_URL = @"http://challenge.superfling.com/photos/
     NSString *getPhotoUrlString = [NSString stringWithFormat:@"%@%@", GET_PHOTO_URL, imageDetail.imageId];
     NSURL *getPhotoURL = [NSURL URLWithString:getPhotoUrlString];
     [self.displayImageView sd_setImageWithURL:getPhotoURL
-                             placeholderImage:[UIImage imageNamed:@"download"]];
+                             placeholderImage:[UIImage imageNamed:@"download"]
+                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                        self.displayImageView.alpha = 0.0;
+                                        self.displayImageView.transform =CGAffineTransformMakeScale(0.8, 0.8);
+                                        [UIView animateWithDuration:1.0 animations:^{
+                                            self.displayImageView.alpha = 1.0;
+                                            self.displayImageView.transform =CGAffineTransformMakeScale(1.0, 1.0);
+                                        }];
+                                    }];
 }
 
 @end
