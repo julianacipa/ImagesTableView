@@ -17,8 +17,6 @@ static NSString *const GET_PHOTO_URL = @"http://challenge.superfling.com/photos/
 
 @interface ImageTableViewCell ()
 
-@property (strong, nonatomic) ImageDetail *imageDetail;
-
 @property (weak, nonatomic) IBOutlet UIImageView *displayImageView;
 @property (weak, nonatomic) IBOutlet UILabel *imageTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
@@ -28,7 +26,6 @@ static NSString *const GET_PHOTO_URL = @"http://challenge.superfling.com/photos/
 @implementation ImageTableViewCell
 
 -(void)configureWithImageDetail:(ImageDetail *)imageDetail {
-    self.imageDetail = imageDetail;
     self.imageTitleLabel.text = imageDetail.title;
     self.imageButton.enabled = NO;
     
@@ -53,7 +50,6 @@ static NSString *const GET_PHOTO_URL = @"http://challenge.superfling.com/photos/
 }
 
 - (IBAction)onImageTapped {
-    NSAssert(self.imageDetail, @"Image details should not be nil");
     [UIView transitionWithView:self.displayImageView
                       duration:2.4
                        options:UIViewAnimationOptionTransitionFlipFromLeft
