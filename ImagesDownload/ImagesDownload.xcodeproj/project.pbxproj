@@ -18,6 +18,7 @@
 		407E54B91BE815320023323F /* ImagesDownloadUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 407E54B81BE815320023323F /* ImagesDownloadUITests.m */; };
 		407E54CD1BE8239F0023323F /* ImageDetail+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 407E54CA1BE8239F0023323F /* ImageDetail+CoreDataProperties.m */; };
 		407E54CE1BE8239F0023323F /* ImageDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 407E54CC1BE8239F0023323F /* ImageDetail.m */; };
+		407E54D11BE82B0C0023323F /* FetchImageDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 407E54D01BE82B0C0023323F /* FetchImageDetails.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		407E54CA1BE8239F0023323F /* ImageDetail+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ImageDetail+CoreDataProperties.m"; sourceTree = "<group>"; };
 		407E54CB1BE8239F0023323F /* ImageDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDetail.h; sourceTree = "<group>"; };
 		407E54CC1BE8239F0023323F /* ImageDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDetail.m; sourceTree = "<group>"; };
+		407E54CF1BE82B0C0023323F /* FetchImageDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchImageDetails.h; sourceTree = "<group>"; };
+		407E54D01BE82B0C0023323F /* FetchImageDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchImageDetails.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +176,8 @@
 		407E54C81BE817D80023323F /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				407E54CF1BE82B0C0023323F /* FetchImageDetails.h */,
+				407E54D01BE82B0C0023323F /* FetchImageDetails.m */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -310,6 +315,7 @@
 				407E54981BE815320023323F /* ViewController.m in Sources */,
 				407E549E1BE815320023323F /* ImagesDownload.xcdatamodeld in Sources */,
 				407E54CE1BE8239F0023323F /* ImageDetail.m in Sources */,
+				407E54D11BE82B0C0023323F /* FetchImageDetails.m in Sources */,
 				407E54951BE815320023323F /* AppDelegate.m in Sources */,
 				407E54921BE815320023323F /* main.m in Sources */,
 				407E54CD1BE8239F0023323F /* ImageDetail+CoreDataProperties.m in Sources */,
@@ -454,6 +460,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ImagesDownload/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.julianacipa.ImagesDownload;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -465,6 +472,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ImagesDownload/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.julianacipa.ImagesDownload;
 				PRODUCT_NAME = "$(TARGET_NAME)";

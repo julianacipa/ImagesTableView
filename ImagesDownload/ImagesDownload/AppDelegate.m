@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "FetchImageDetails.h"
+#import "ImageDetail.h"
 
 @interface AppDelegate ()
 
@@ -16,8 +18,44 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    [self fetchImageDetails];
+    
     return YES;
+}
+
+-(void)fetchImageDetails {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    [FetchImageDetails fetchImageDetailsWithHandler:^(NSArray *imageDetails, NSError *error) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        if (error || !imageDetails || imageDetails.count == 0) {
+            //handle error here
+        } else {
+            [self saveImageDetails:imageDetails];
+        }
+    }];
+}
+
+-(void)saveImageDetails:(NSArray *)imageDetailsArray {
+    [imageDetailsArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        ImageDetail *imageDetail = [NSEntityDescription
+                                          insertNewObjectForEntityForName:@"ImageDetail"
+                                          inManagedObjectContext:self.managedObjectContext];
+        imageDetail.imageDetailsId = [obj objectForKey:@"ID"];
+        imageDetail.imageId = [obj objectForKey:@"ImageID"];
+        imageDetail.title = [obj objectForKey:@"Title"];
+        imageDetail.userId = [obj objectForKey:@"UserID"];
+        imageDetail.userName = [obj objectForKey:@"UserName"];
+
+        NSError *error;
+        if ([self.managedObjectContext save:&error]) {
+            
+            
+        } else {
+            //handle error
+        }
+    }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -39,8 +77,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    // Saves changes in the application's managed object context before the application terminates.
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AddProduct" object:nil];
     [self saveContext];
 }
 
