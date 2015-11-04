@@ -49,6 +49,9 @@ NSString *const GET_IMAGE_DETAILS_URL = @"http://challenge.superfling.com";
                 });
             }
         } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                handler(nil, [NSError errorWithDomain:@"domain" code:httpResp.statusCode userInfo:nil]);
+            });
         }
         
     }] resume];

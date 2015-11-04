@@ -47,6 +47,15 @@ static NSString *const kCellImage = @"imageCell";
     [self.tableView reloadData];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
+        if (self.imageDetails && self.imageDetails.count > 0) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"PrintStatistics" object:nil];
+            [[NSNotificationCenter defaultCenter] removeObserver:@"PrintStatistics"];
+        }
+    }
+}
+
 #pragma mark - UITableViewDataSource methods
 
 - (NSInteger)tableView:(UITableView * __unused)tableView numberOfRowsInSection:(NSInteger)section {

@@ -8,6 +8,7 @@
 
 #import "ImageTableViewCell.h"
 #import "ImageDetail.h"
+#import "ImageData.h"
 #import "UIImageView+WebCache.h"
 #include <math.h>
 
@@ -21,11 +22,14 @@ static NSString *const GET_PHOTO_URL = @"http://challenge.superfling.com/photos/
 @property (weak, nonatomic) IBOutlet UILabel *imageTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
 
+@property (strong, nonatomic) ImageDetail *imageDetail;
+
 @end
 
 @implementation ImageTableViewCell
 
 -(void)configureWithImageDetail:(ImageDetail *)imageDetail {
+    self.imageDetail = imageDetail;
     self.imageTitleLabel.text = imageDetail.title;
     self.imageButton.enabled = NO;
     
@@ -35,18 +39,42 @@ static NSString *const GET_PHOTO_URL = @"http://challenge.superfling.com/photos/
                              placeholderImage:[UIImage imageNamed:@"download"]
                                     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) { 
                                         if (cacheType == SDImageCacheTypeNone) {
-                                            self.displayImageView.alpha = 0.0;
-                                            self.displayImageView.transform =CGAffineTransformMakeScale(0.8, 0.8);
-                                            [UIView animateWithDuration:1.0 animations:^{
-                                                self.displayImageView.alpha = 1.0;
-                                                self.displayImageView.transform =CGAffineTransformMakeScale(1.0, 1.0);
-                                            } completion:^(BOOL completion) {
-                                                self.imageButton.enabled = YES;
-                                            }];
+                                            [self sendImageDataToSave:image];
+                                            [self handleImage];
                                         } else {
                                             self.imageButton.enabled = YES;
                                         }
                                     }];
+}
+
+-(void)enableImageButton {
+    self.imageButton.enabled = YES;
+}
+
+-(void)sendImageDataToSave:(UIImage *)image {
+    ImageData *imageData = [[ImageData alloc] init];
+    imageData.imageDetailsId = self.imageDetail.imageDetailsId;
+    imageData.imageWidth = image.size.width;
+    imageData.imageSize = [self imageSize:image];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SaveImageData"
+                                                        object:imageData];
+}
+
+-(void)handleImage {
+    self.displayImageView.alpha = 0.0;
+    self.displayImageView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+    [UIView animateWithDuration:1.0 animations:^{
+        self.displayImageView.alpha = 1.0;
+        self.displayImageView.transform =CGAffineTransformMakeScale(1.0, 1.0);
+    } completion:^(BOOL completion) {
+        [self enableImageButton];
+    }];
+}
+
+-(NSUInteger)imageSize:(UIImage *)image {
+    NSData *imgData = UIImageJPEGRepresentation(image, 1);
+    return imgData.length;
 }
 
 - (IBAction)onImageTapped {

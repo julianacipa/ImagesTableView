@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "FetchImageDetails.h"
 #import "ImageDetail.h"
+#import "ImageData.h"
 
 @interface AppDelegate ()
 
@@ -21,6 +22,16 @@
     
     [self clearImageDetails];
     [self fetchImageDetails];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(saveImagesSizeAndWidth:)
+                                                 name:@"SaveImageData"
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(printStatistics)
+                                                 name:@"PrintStatistics"
+                                               object:nil];
     
     return YES;
 }
@@ -62,7 +73,7 @@
 
         NSError *error;
         if (![self.managedObjectContext save:&error]) {
-            //handle error
+            NSLog(@"Handle error");
         }
     }];
 }
@@ -76,6 +87,38 @@
     NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DisplayImages"
                                                         object:fetchedObjects];
+}
+
+-(void)saveImagesSizeAndWidth:(NSNotification *)note {
+    ImageData *imageData = note.object;
+    
+    NSFetchRequest *fetchImageDetails = [NSFetchRequest fetchRequestWithEntityName:@"ImageDetail"];
+    fetchImageDetails.predicate = [NSPredicate predicateWithFormat:@"(imageDetailsId = %@)", imageData.imageDetailsId];
+    fetchImageDetails.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"imageDetailsId" ascending:NO]];
+    NSError *fetchError;
+    NSArray *results = [self.managedObjectContext executeFetchRequest:fetchImageDetails error:&fetchError];
+  
+    if (results == nil) {
+        NSLog(@"Error: %@", [fetchError localizedDescription]);
+    } else if (fetchError){
+        NSLog(@"Error - handle error");
+    } else {
+        ImageDetail *imageDetail = results[0];
+        imageDetail.imageWidth = [NSNumber numberWithFloat:imageData.imageWidth];
+        imageDetail.imageSize = [NSNumber numberWithFloat:imageData.imageSize];
+        
+        [self saveContext];
+    }
+}
+
+-(void)printStatistics {
+    NSFetchRequest *fetchAllImageDetails = [NSFetchRequest fetchRequestWithEntityName:@"ImageDetail"];
+    NSError *fetchError;
+    NSArray *results = [self.managedObjectContext executeFetchRequest:fetchAllImageDetails error:&fetchError];
+    
+        for (ImageDetail *imageDetail in results) {
+            NSLog(@"***** PRINT **** %@ - %@ - %@", [imageDetail.imageDetailsId stringValue], [imageDetail.imageWidth stringValue], [imageDetail.imageSize stringValue]);
+        }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -97,7 +140,8 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
- 
+    [[NSNotificationCenter defaultCenter] removeObserver:@"PrintStatistics"];
+    [[NSNotificationCenter defaultCenter] removeObserver:@"SaveImageData"];
     [self saveContext];
 }
 

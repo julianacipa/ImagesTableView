@@ -20,6 +20,8 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+// It can be used to print out statistics at any time
+-(void)printStatistics;
 
 @end
 

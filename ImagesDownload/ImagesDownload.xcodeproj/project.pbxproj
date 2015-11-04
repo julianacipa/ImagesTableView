@@ -36,6 +36,7 @@
 		407E55031BE84F7B0023323F /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 407E54F11BE84F7B0023323F /* UIImageView+HighlightedWebCache.m */; };
 		407E55041BE84F7B0023323F /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 407E54F31BE84F7B0023323F /* UIImageView+WebCache.m */; };
 		407E55051BE84F7B0023323F /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 407E54F51BE84F7B0023323F /* UIView+WebCacheOperation.m */; };
+		40B437031BE982E5005F2399 /* ImageData.m in Sources */ = {isa = PBXBuildFile; fileRef = 40B437021BE982E5005F2399 /* ImageData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,8 @@
 		407E54F31BE84F7B0023323F /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		407E54F41BE84F7B0023323F /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		407E54F51BE84F7B0023323F /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		40B437011BE982E5005F2399 /* ImageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageData.h; sourceTree = "<group>"; };
+		40B437021BE982E5005F2399 /* ImageData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +225,8 @@
 				407E54CA1BE8239F0023323F /* ImageDetail+CoreDataProperties.m */,
 				407E54CB1BE8239F0023323F /* ImageDetail.h */,
 				407E54CC1BE8239F0023323F /* ImageDetail.m */,
+				40B437011BE982E5005F2399 /* ImageData.h */,
+				40B437021BE982E5005F2399 /* ImageData.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -439,6 +444,7 @@
 				407E54D41BE8431B0023323F /* ImageTableViewCell.m in Sources */,
 				407E54F91BE84F7B0023323F /* SDImageCache.m in Sources */,
 				407E54F71BE84F7B0023323F /* README.md in Sources */,
+				40B437031BE982E5005F2399 /* ImageData.m in Sources */,
 				407E54921BE815320023323F /* main.m in Sources */,
 				407E55011BE84F7B0023323F /* UIImage+GIF.m in Sources */,
 				407E54FC1BE84F7B0023323F /* SDWebImageDownloader.m in Sources */,
@@ -670,6 +676,7 @@
 				407E54BF1BE815330023323F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		407E54C01BE815330023323F /* Build configuration list for PBXNativeTarget "ImagesDownloadTests" */ = {
 			isa = XCConfigurationList;
@@ -678,6 +685,7 @@
 				407E54C21BE815330023323F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		407E54C31BE815330023323F /* Build configuration list for PBXNativeTarget "ImagesDownloadUITests" */ = {
 			isa = XCConfigurationList;
@@ -686,6 +694,7 @@
 				407E54C51BE815330023323F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

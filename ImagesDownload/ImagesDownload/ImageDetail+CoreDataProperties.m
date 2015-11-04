@@ -18,5 +18,7 @@
 @dynamic title;
 @dynamic userId;
 @dynamic userName;
+@dynamic imageSize;
+@dynamic imageWidth;
 
 @end

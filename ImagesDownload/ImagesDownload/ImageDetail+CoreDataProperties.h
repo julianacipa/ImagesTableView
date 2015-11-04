@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *title;
 @property (nullable, nonatomic, retain) NSNumber *userId;
 @property (nullable, nonatomic, retain) NSString *userName;
+@property (nullable, nonatomic, retain) NSNumber *imageSize;
+@property (nullable, nonatomic, retain) NSNumber *imageWidth;
 
 @end
 
