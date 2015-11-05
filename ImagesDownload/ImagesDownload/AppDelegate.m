@@ -11,6 +11,10 @@
 #import "ImageDetail.h"
 #import "ImageData.h"
 
+static NSString *const NUMBER_OF_POSTS = @"numberOfPosts";
+static NSString *const AVERAGE_IMAGE_SIZE = @"averageImageSize";
+static NSString *const MAX_WIDTH = @"maxWidth";
+
 @interface AppDelegate ()
 
 @end
@@ -112,13 +116,61 @@
 }
 
 -(void)printStatistics {
-    NSFetchRequest *fetchAllImageDetails = [NSFetchRequest fetchRequestWithEntityName:@"ImageDetail"];
-    NSError *fetchError;
-    NSArray *results = [self.managedObjectContext executeFetchRequest:fetchAllImageDetails error:&fetchError];
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"ImageDetail"
+                                              inManagedObjectContext:self.managedObjectContext];
+    NSAttributeDescription* userIdDesc = [entity.attributesByName objectForKey:@"userId"];
+    NSAttributeDescription* userNameDesc = [entity.attributesByName objectForKey:@"userName"];
     
-        for (ImageDetail *imageDetail in results) {
-            NSLog(@"***** PRINT **** %@ - %@ - %@", [imageDetail.imageDetailsId stringValue], [imageDetail.imageWidth stringValue], [imageDetail.imageSize stringValue]);
-        }
+    NSExpressionDescription *countExpressionDescription = [self expressionWithKeyPath:@"userName"
+                                                                         withFunction:@"count:"
+                                                               andWithDescriptionName:NUMBER_OF_POSTS
+                                                                 andWithAttributetype:NSInteger16AttributeType];
+    
+    NSExpressionDescription *averageExpressionDescription = [self expressionWithKeyPath:@"imageSize"
+                                                                           withFunction:@"average:"
+                                                                 andWithDescriptionName:AVERAGE_IMAGE_SIZE
+                                                                   andWithAttributetype:NSFloatAttributeType];
+    
+    NSExpressionDescription *maxWidthExpressionDescription = [self expressionWithKeyPath:@"imageWidth"
+                                                                            withFunction:@"max:"
+                                                                  andWithDescriptionName:MAX_WIDTH
+                                                                    andWithAttributetype:NSInteger32AttributeType];
+    
+    NSFetchRequest *fetchGroupedImageDetails = [NSFetchRequest fetchRequestWithEntityName:@"ImageDetail"];
+    [fetchGroupedImageDetails setPropertiesToFetch:[NSArray arrayWithObjects:userNameDesc, countExpressionDescription, averageExpressionDescription, maxWidthExpressionDescription, nil]];
+    [fetchGroupedImageDetails setPropertiesToGroupBy:[NSArray arrayWithObject:userNameDesc]];
+    [fetchGroupedImageDetails setResultType:NSDictionaryResultType];
+    NSError* error = nil;
+    NSArray *results = [self.managedObjectContext executeFetchRequest:fetchGroupedImageDetails
+                                                                error:&error];
+    
+    [self logResults:results];
+}
+
+-(void)logResults:(NSArray *)results {
+    NSLog(@"-----------------------------------------------------------------------------------");
+    NSLog(@"User name   -   Number of posts   -   Average image size   -   Greatest Photo Width");
+    NSLog(@"-----------------------------------------------------------------------------------");
+    for (NSDictionary *imageDetail in results) {
+        NSLog(@"%@          %@                 %@                   %@", imageDetail[@"userName"], imageDetail[NUMBER_OF_POSTS], imageDetail[AVERAGE_IMAGE_SIZE], imageDetail[MAX_WIDTH]);
+    }
+    NSLog(@"-----------------------------------------------------------------------------------");
+}
+
+-(NSExpressionDescription *)expressionWithKeyPath:(NSString *)keyPath
+                                     withFunction:(NSString *)functionName
+                           andWithDescriptionName:(NSString *)descriptionName
+                             andWithAttributetype:(NSAttributeType)attributeType {
+    NSExpression *keyPathExpression = [NSExpression expressionForKeyPath: keyPath];
+    NSExpression *functionxpression = [NSExpression expressionForFunction: functionName
+                                                                arguments: [NSArray arrayWithObject:keyPathExpression]];
+    
+    NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
+    [expressionDescription setName: descriptionName];
+    [expressionDescription setExpression: functionxpression];
+    [expressionDescription setExpressionResultType: attributeType];
+    
+    return expressionDescription;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
